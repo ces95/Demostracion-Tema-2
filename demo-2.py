@@ -18,8 +18,9 @@ import numpy as np
 
 
 #INICIO DEL MENU DEL PROGRAMA
-ans = ''
+ans = True
 while ans :
+    os.system('cls')
     print(
         """
         Menu de Inicio
@@ -64,9 +65,9 @@ while ans :
 
         elif s=='4':
             os.system('cls')
-            print('Retornando....')
+            print('Retornando....\n\n')
             os.system('pause')
-            break
+            continue
         else:
             os.system('cls')
             print("\n   Opcion no reconocida...\n")
@@ -104,9 +105,9 @@ while ans :
 
         elif d=='4':
             os.system('cls')
-            print('Retornando....')
+            print('Retornando....\n\n')
             os.system('pause')
-            break
+            continue
 
         else:
             os.system('cls')
@@ -116,8 +117,7 @@ while ans :
 
     elif ans=='3':
         os.system('cls')
-        print('Saliendo del programa....')
-        os.system('pause')
+        print('Saliendo del programa.... \n')
         break
 
 
