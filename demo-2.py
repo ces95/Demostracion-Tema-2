@@ -8,40 +8,30 @@ Salma Marmol - 108
 
 # Librerias
 import os
+import sys
+import numpy as np
 
 
 
 
 #FUNCIONES
-"""def simetrico():
-    os.system('cls')
-    print('')
 
-def asimetrico():
-    os.system('cls')
-    print('')
-
-def matricial():
-    os.system('cls')
-    print('')
-"""
 
 #INICIO DEL MENU DEL PROGRAMA
 ans = ''
-
 while ans :
     print(
         """
-            Menu de Inicio
-            --- Seleccione una de las siguiente opciones con los numeros ---
-            [1] Encriptar 
-            [2] Desencriptar
-            [3] Salir 
+        Menu de Inicio
+        --- Seleccione una de las siguiente opciones con los numeros ---
+        [1] Encriptar
+        [2] Desencriptar
+        [3] Salir
 
         """)
-        
+
     ans = input("Que desea hacer? ")
-        
+
     if ans=="1":
         os.system('cls')
         print(
@@ -51,7 +41,7 @@ while ans :
             [1] Encriptar por Algoritmo Simetrico
             [2] Encriptar por Algoritmo Asimetrico
             [3] Encriptar por Algoritmo basado en Matriz
-            [4] Retornar 
+            [4] Retornar
 
             """)
         s = input("Que desea hacer? ")
@@ -92,7 +82,7 @@ while ans :
             [1] Desencriptar por Algoritmo Simetrico
             [2] Desencriptar por Algoritmo Asimetrico
             [3] Desencriptar por Algoritmo basado en Matriz
-            [4] Retornar 
+            [4] Retornar
 
             """)
         d = input("Que desea hacer? ")
@@ -136,8 +126,3 @@ while ans :
         print("\n   Opcion no reconocida...\n")
         os.system('pause')
         continue
-    
-    
-
-
-
