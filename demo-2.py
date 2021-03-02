@@ -170,7 +170,7 @@ alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz ,.@?" #mod 57
 letter_to_index = dict(zip(alphabet, range(len(alphabet))))
 index_to_letter = dict(zip(range(len(alphabet)), alphabet))
 
-def Matrix_mod_inv(matrix,modu):
+def Matrix_mod_inv(matrix,modulus):
 
     """
     En este metodo es necesario buscar la inversa del modulo de la matriz, para ello es necesario
@@ -178,9 +178,10 @@ def Matrix_mod_inv(matrix,modu):
     2- Encontrar el determinante en el valor especifico del modulo (osea la longitud del alfabeto)
 
     """
-    det = int(np.round(np.linalg.det(matrix)))  # 1
-    det_inv = egcd(det, modu)[1] % modu  # 2
-    matrix_modulus_inv = (det_inv * np.round(det * np.linalg.inv(matrix)).astype(int) % modu)
+    det = int(np.round(np.linalg.det(matrix)))  # Step 1)
+    det_inv = egcd(det, modulus)[1] % modulus  # Step 2)
+    matrix_modulus_inv = (
+        det_inv * np.round(det * np.linalg.inv(matrix)).astype(int) % modulus  )
 
     return Matrix_mod_inv
 
@@ -214,8 +215,6 @@ def Encrypt_HC(message, K):
     return encrypted
 
 def Derypt_HC(cipher, Kinv):
-
-
     decrypted = ""
     cipher_in_numbers = []
 
@@ -224,7 +223,8 @@ def Derypt_HC(cipher, Kinv):
 
     split_C = [
         cipher_in_numbers[i : i + int(Kinv.shape[0])]
-        for i in range(0, len(cipher_in_numbers), int(Kinv.shape[0]))]
+        for i in range(0, len(cipher_in_numbers), int(Kinv.shape[0]))
+    ]
 
     for C in split_C:
         C = np.transpose(np.asarray(C))[:, np.newaxis]
@@ -289,14 +289,20 @@ def main():
 
                 message = input("\nEscriba el mnesaje que desee cifrar:\n")
                 # K = np.matrix([[3, 3], [2, 5]])
-                # K = np.matrix([[6, 24, 1], [13,16,10], [20,17,15]]) # for length of alphabet = 26
+                #K = np.matrix([[6, 24, 1], [13,16,10], [20,17,15]]) # for length of alphabet = 26
                 K = np.matrix([[3,10,20],[20,19,17], [23,78,17]]) # for length of alphabet = 27
 
 
-                #Matrix_mod_inv(matrix,modu)
                 encrypted_message = Encrypt_HC(message,K)
                 print("\n"+"Original message: " + message)
                 print("Encrypted message: " + encrypted_message+"\n")
+
+                Kinv = Matrix_mod_inv(K, len(alphabet))
+                #Derypt_HC(cipher, Kinv)
+
+
+                decrypted_message = Derypt_HC(encrypted_message, Kinv)
+                print("Decrypted message: " + decrypted_message+"\n")
                 os.system('pause')
 
             elif s=='4':
@@ -339,9 +345,9 @@ def main():
             elif d=='3':
                 os.system('cls')
                 print("\nDesencriptar por Algoritmo basado en Matriz\n")
+                K = np.matrix([[3,10,20],[20,19,17], [23,78,17]])
                 Kinv = Matrix_mod_inv(K, len(alphabet))
                 #Derypt_HC(cipher, Kinv)
-
 
                 decrypted_message = Derypt_HC(encrypted_message, Kinv)
                 print("Encrypted message: " + encrypted_message+"\n")
