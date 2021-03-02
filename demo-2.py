@@ -13,28 +13,32 @@ import os
 
 
 #FUNCIONES
-def simetrico():
+"""def simetrico():
+    os.system('cls')
     print('')
 
 def asimetrico():
+    os.system('cls')
     print('')
 
 def matricial():
+    os.system('cls')
     print('')
+"""
 
-
-
+#INICIO DEL MENU DEL PROGRAMA
 ans = ''
-while ans==True:
+
+while ans :
     print(
-            """
+        """
             Menu de Inicio
             --- Seleccione una de las siguiente opciones con los numeros ---
             [1] Encriptar 
             [2] Desencriptar
             [3] Salir 
 
-            """)
+        """)
         
     ans = input("Que desea hacer? ")
         
@@ -54,18 +58,18 @@ while ans==True:
 
         if s=='1':
             os.system('cls')
-
+            print("Encriptar por Algoritmo Simetrico")
             os.system('pause')
 
         elif s=='2':
             os.system('cls')
-
+            print("Encriptar por Algoritmo Asimetrico")
             os.system('pause')
 
 
         elif s=='3':
             os.system('cls')
-
+            print("Encriptar por Algoritmo basado en Matriz")
             os.system('pause')
 
         elif s=='4':
@@ -95,17 +99,17 @@ while ans==True:
 
         if d=='1':
             os.system('cls')
-
+            print("\nDesencriptar por Algoritmo Simetrico")
             os.system('pause')
 
         elif d=='2':
             os.system('cls')
-
+            print("\nDesencriptar por Algoritmo Asimetrico")
             os.system('pause')
 
         elif d=='3':
             os.system('cls')
-
+            print("Desencriptar por Algoritmo basado en Matriz")
             os.system('pause')
 
         elif d=='4':
@@ -133,6 +137,7 @@ while ans==True:
         os.system('pause')
         continue
     
+    
 
-#INICIO DEL MENU DEL PROGRAMA
+
 
