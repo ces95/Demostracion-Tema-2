@@ -128,7 +128,7 @@ def Encrypt_data_AES():
 
 def Decrypt_data_AES():
     key = get_random_bytes(32) # Genera la llave
-    dataenc = 'Esto es tarea de criptografia!' # Son los datos
+    dataenc = input('Escriba el texto que desea encriptar \n') # Son los datos
 
     # === Cifrado ===
 
