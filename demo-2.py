@@ -154,7 +154,7 @@ def Decrypt_data_AES(dataenc):
 
     assert dataenc1 == decdata, 'La data original no concuerda con el resultado'
 
-#Metodos de Encriptado por Matriz
+#Metodos de Encriptado por Matrizr
 """
 Notas para Hill Cipher!
     Important notation:
@@ -297,12 +297,6 @@ def main():
                 print("\n"+"Original message: " + message)
                 print("Encrypted message: " + encrypted_message+"\n")
 
-                Kinv = Matrix_mod_inv(K, len(alphabet))
-                #Derypt_HC(cipher, Kinv)
-
-
-                decrypted_message = Derypt_HC(encrypted_message, Kinv)
-                print("Decrypted message: " + decrypted_message+"\n")
                 os.system('pause')
 
             elif s=='4':
