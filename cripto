@@ -1,0 +1,8 @@
+El algoritmo fue descrito en 1977 por Ron Rivest, Adi Shamir y Leonard Adleman, 
+del Instituto Tecnológico de Massachusetts (MIT); las letras RSA son las iniciales
+ de sus apellidos. Clifford Cocks, un matemático británico que trabajaba para
+  la agencia de inteligencia británica GCHQ, había descrito un sistema equivalente 
+  en un documento interno en 1973. Debido al elevado coste de las computadoras necesarias
+   para implementarlo en la época su idea no trascendió. Su descubrimiento, sin embargo, 
+   no fue revelado hasta 1997 ya que era confidencial, 
+por lo que Rivest, Shamir y Adleman desarrollaron RSA de forma independiente.
