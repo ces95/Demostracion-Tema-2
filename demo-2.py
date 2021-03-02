@@ -6,124 +6,131 @@ Salma Marmol - 108
 
 """
 
-# Librerias
+# LIBRERIAS
+    #Para funciones del programa
 import os
 import sys
+    #Para el encritado de la Matriz
 import numpy as np
-
-
+    #Para el encriptado Asimetrico
+import rsa
+from cryptography.fernet import Fernet #para la implementacion de la llave secreta
+    #Para el encriptado Asimetrico
+from Crypto.Cipher import AES
+from Crypto.Random import get_random_bytes
 
 
 #FUNCIONES
+def main():
+    ans = True
+    while ans :
+        os.system('cls')
+        print(
+            """
+            Menu de Inicio
+            --- Seleccione una de las siguiente opciones con los numeros ---
+            [1] Encriptar
+            [2] Desencriptar
+            [3] Salir
 
+            """)
+
+        ans = input("Que desea hacer? ")
+
+        if ans=="1":
+            os.system('cls')
+            print(
+                """
+                Menu de Encriptado
+                --- Seleccione una de las siguiente opciones con los numeros ---
+                [1] Encriptar por Algoritmo Simetrico
+                [2] Encriptar por Algoritmo Asimetrico
+                [3] Encriptar por Algoritmo basado en Matriz
+                [4] Retornar
+
+                """)
+            s = input("Que desea hacer? ")
+
+            if s=='1':
+                os.system('cls')
+                print("Encriptar por Algoritmo Simetrico")
+                os.system('pause')
+
+            elif s=='2':
+                os.system('cls')
+                print("Encriptar por Algoritmo Asimetrico")
+                os.system('pause')
+
+
+            elif s=='3':
+                os.system('cls')
+                print("Encriptar por Algoritmo basado en Matriz")
+                os.system('pause')
+
+            elif s=='4':
+                os.system('cls')
+                print('Retornando....\n\n')
+                os.system('pause')
+                continue
+            else:
+                os.system('cls')
+                print("\n   Opcion no reconocida...\n")
+                os.system('pause')
+                continue
+
+        elif ans=='2':
+            os.system('cls')
+            print(
+                """
+                Menu de Desencriptado
+                --- Seleccione una de las siguiente opciones con los numeros ---
+                [1] Desencriptar por Algoritmo Simetrico
+                [2] Desencriptar por Algoritmo Asimetrico
+                [3] Desencriptar por Algoritmo basado en Matriz
+                [4] Retornar
+
+                """)
+            d = input("Que desea hacer? ")
+
+            if d=='1':
+                os.system('cls')
+                print("\nDesencriptar por Algoritmo Simetrico")
+                os.system('pause')
+
+            elif d=='2':
+                os.system('cls')
+                print("\nDesencriptar por Algoritmo Asimetrico")
+                os.system('pause')
+
+            elif d=='3':
+                os.system('cls')
+                print("Desencriptar por Algoritmo basado en Matriz")
+                os.system('pause')
+
+            elif d=='4':
+                os.system('cls')
+                print('Retornando....\n\n')
+                os.system('pause')
+                continue
+
+            else:
+                os.system('cls')
+                print("\n   Opcion no reconocida...\n")
+                os.system('pause')
+                continue
+
+        elif ans=='3':
+            os.system('cls')
+            print('Saliendo del programa.... \n')
+            break
+
+
+
+        else:
+            os.system('cls')
+            print("\n   Opcion no reconocida...\n")
+            os.system('pause')
+            continue
 
 #INICIO DEL MENU DEL PROGRAMA
-ans = True
-while ans :
-    os.system('cls')
-    print(
-        """
-        Menu de Inicio
-        --- Seleccione una de las siguiente opciones con los numeros ---
-        [1] Encriptar
-        [2] Desencriptar
-        [3] Salir
-
-        """)
-
-    ans = input("Que desea hacer? ")
-
-    if ans=="1":
-        os.system('cls')
-        print(
-            """
-            Menu de Encriptado
-            --- Seleccione una de las siguiente opciones con los numeros ---
-            [1] Encriptar por Algoritmo Simetrico
-            [2] Encriptar por Algoritmo Asimetrico
-            [3] Encriptar por Algoritmo basado en Matriz
-            [4] Retornar
-
-            """)
-        s = input("Que desea hacer? ")
-
-        if s=='1':
-            os.system('cls')
-            print("Encriptar por Algoritmo Simetrico")
-            os.system('pause')
-
-        elif s=='2':
-            os.system('cls')
-            print("Encriptar por Algoritmo Asimetrico")
-            os.system('pause')
-
-
-        elif s=='3':
-            os.system('cls')
-            print("Encriptar por Algoritmo basado en Matriz")
-            os.system('pause')
-
-        elif s=='4':
-            os.system('cls')
-            print('Retornando....\n\n')
-            os.system('pause')
-            continue
-        else:
-            os.system('cls')
-            print("\n   Opcion no reconocida...\n")
-            os.system('pause')
-            continue
-
-    elif ans=='2':
-        os.system('cls')
-        print(
-            """
-            Menu de Desencriptado
-            --- Seleccione una de las siguiente opciones con los numeros ---
-            [1] Desencriptar por Algoritmo Simetrico
-            [2] Desencriptar por Algoritmo Asimetrico
-            [3] Desencriptar por Algoritmo basado en Matriz
-            [4] Retornar
-
-            """)
-        d = input("Que desea hacer? ")
-
-        if d=='1':
-            os.system('cls')
-            print("\nDesencriptar por Algoritmo Simetrico")
-            os.system('pause')
-
-        elif d=='2':
-            os.system('cls')
-            print("\nDesencriptar por Algoritmo Asimetrico")
-            os.system('pause')
-
-        elif d=='3':
-            os.system('cls')
-            print("Desencriptar por Algoritmo basado en Matriz")
-            os.system('pause')
-
-        elif d=='4':
-            os.system('cls')
-            print('Retornando....\n\n')
-            os.system('pause')
-            continue
-
-        else:
-            os.system('cls')
-            print("\n   Opcion no reconocida...\n")
-            os.system('pause')
-            continue
-
-    elif ans=='3':
-        os.system('cls')
-        print('Saliendo del programa.... \n')
-        break
-
-
-
-    else:
-        os.system('cls')
-        print("\n   Opcion no reconocida...\n")
-        os.system('pause')
-        continue
+main()
