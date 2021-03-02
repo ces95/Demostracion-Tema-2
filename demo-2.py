@@ -155,17 +155,87 @@ def Decrypt_data_AES(dataenc):
     assert dataenc1 == decdata, 'La data original no concuerda con el resultado'
 
 #Metodos de Encriptado por Matriz
+"""
+Notas para Hill Cipher!
+    Important notation:
+K = Matrix which is our 'Secret Key'
+P = Vector of plaintext (that has been mapped to numbers)
+C = Vector of Ciphered text (in numbers)
+C = E(K,P) = K*P (mod X) -- X is length of alphabet used
+P = D(K,C) = inv(K)*C (mod X)  -- X is length of alphabet used
+"""
+alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz ,.@?" #mod 57
+#alphabet = "abcdefghijklmnopqrstuvwxyz " #mod 27
+
+letter_to_index = dict(zip(alphabet, range(len(alphabet))))
+index_to_letter = dict(zip(range(len(alphabet)), alphabet))
+
 def Matrix_mod_inv(matrix,modu):
+
+    """
+    En este metodo es necesario buscar la inversa del modulo de la matriz, para ello es necesario
+    1- Encontrar el determinante de la Matriz
+    2- Encontrar el determinante en el valor especifico del modulo (osea la longitud del alfabeto)
+
+    """
+    det = int(np.round(np.linalg.det(matrix)))  # 1
+    det_inv = egcd(det, modu)[1] % modu  # 2
+    matrix_modulus_inv = (det_inv * np.round(det * np.linalg.inv(matrix)).astype(int) % modu)
 
     return Matrix_mod_inv
 
-def Encrypt_HC(message, k):
+def Encrypt_HC(message, K):
 
-    pass
+    encrypted = ""
+    message_in_numbers = []
 
-def Derypt_HC():
+    for letter in message:
+        message_in_numbers.append(letter_to_index[letter])
 
-    pass
+    split_P = [
+        message_in_numbers[i : i + int(K.shape[0])]
+        for i in range(0, len(message_in_numbers), int(K.shape[0]))
+    ]
+
+    for P in split_P:
+        P = np.transpose(np.asarray(P))[:, np.newaxis]
+
+        while P.shape[0] != K.shape[0]:
+            P = np.append(P, letter_to_index[" "])[:, np.newaxis]
+
+        numbers = np.dot(K, P) % len(alphabet)
+        n = numbers.shape[0]  # length of encrypted message (in numbers)
+
+        # Map back to get encrypted text
+        for idx in range(n):
+            number = int(numbers[idx, 0])
+            encrypted += index_to_letter[number]
+
+    return encrypted
+
+def Derypt_HC(cipher, Kinv):
+
+
+    decrypted = ""
+    cipher_in_numbers = []
+
+    for letter in cipher:
+        cipher_in_numbers.append(letter_to_index[letter])
+
+    split_C = [
+        cipher_in_numbers[i : i + int(Kinv.shape[0])]
+        for i in range(0, len(cipher_in_numbers), int(Kinv.shape[0]))]
+
+    for C in split_C:
+        C = np.transpose(np.asarray(C))[:, np.newaxis]
+        numbers = np.dot(Kinv, C) % len(alphabet)
+        n = numbers.shape[0]
+
+        for idx in range(n):
+            number = int(numbers[idx, 0])
+            decrypted += index_to_letter[number]
+
+    return decrypted
 
 #Funcion MAIN - Para el menu del programa
 def main():
@@ -215,7 +285,18 @@ def main():
 
             elif s=='3':
                 os.system('cls')
-                print("\nEncriptar por Algoritmo basado en Matriz\n")
+                print("\nEncriptar por Algoritmo de Matriz Hill Cipher\n")
+
+                message = input("\nEscriba el mnesaje que desee cifrar:\n")
+                # K = np.matrix([[3, 3], [2, 5]])
+                # K = np.matrix([[6, 24, 1], [13,16,10], [20,17,15]]) # for length of alphabet = 26
+                K = np.matrix([[3,10,20],[20,19,17], [23,78,17]]) # for length of alphabet = 27
+
+
+                #Matrix_mod_inv(matrix,modu)
+                encrypted_message = Encrypt_HC(message,K)
+                print("\n"+"Original message: " + message)
+                print("Encrypted message: " + encrypted_message+"\n")
                 os.system('pause')
 
             elif s=='4':
@@ -258,6 +339,13 @@ def main():
             elif d=='3':
                 os.system('cls')
                 print("\nDesencriptar por Algoritmo basado en Matriz\n")
+                Kinv = Matrix_mod_inv(K, len(alphabet))
+                #Derypt_HC(cipher, Kinv)
+
+
+                decrypted_message = Derypt_HC(encrypted_message, Kinv)
+                print("Encrypted message: " + encrypted_message+"\n")
+                print("Decrypted message: " + decrypted_message+"\n")
                 os.system('pause')
 
             elif d=='4':
