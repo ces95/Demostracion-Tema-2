@@ -107,9 +107,9 @@ def Decrypt_data_RSA():
 
 #Metodos de Encriptado Simetrico
 
-def Encrypt_data_AES():
+def Encrypt_data_AES(dataenc):
     key = get_random_bytes(32) # Genera la llave
-    dataenc = 'Esto es tarea de criptografia!' # Son los datos
+    #dataenc = input('Escriba el texto que desea encriptar \n') # Son los datos
 
     # === Cifrado ===
 
@@ -126,14 +126,14 @@ def Encrypt_data_AES():
 
     print(ciphdata)
 
-def Decrypt_data_AES():
+def Decrypt_data_AES(dataenc):
     key = get_random_bytes(32) # Genera la llave
-    dataenc = input('Escriba el texto que desea encriptar \n') # Son los datos
+    dataenc1 = dataenc # Son los datos
 
     # === Cifrado ===
 
     # Convierte los datos en bytes, usando .encode
-    data = dataenc.encode('utf-8')
+    data = dataenc1.encode('utf-8')
 
     #Crea el objecto de cifrado, y cifra los datos
     cipherenc = AES.new(key, AES.MODE_CFB)
@@ -152,7 +152,7 @@ def Decrypt_data_AES():
     print(decdata)
     # === Prueba para comparar los datos ===
 
-    assert dataenc == decdata, 'La data original no concuerda con el resultado'
+    assert dataenc1 == decdata, 'La data original no concuerda con el resultado'
 
 #Metodos de Encriptado por Matriz
 def Matrix_mod_inv(matrix,modu):
@@ -201,7 +201,8 @@ def main():
             if s=='1':
                 os.system('cls')
                 print("\nEncriptar por Algoritmo Simetrico RSA\n")
-                Encrypt_data_AES()
+                dataenc = input('Escriba el texto que desea encriptar \n') # Son los dato
+                Encrypt_data_AES(dataenc)
                 os.system('pause')
 
             elif s=='2':
@@ -245,7 +246,7 @@ def main():
             if d=='1':
                 os.system('cls')
                 print("\nDesencriptar por Algoritmo Simetrico\n")
-                Decrypt_data_AES()
+                Decrypt_data_AES(dataenc)
                 os.system('pause')
 
             elif d=='2':
