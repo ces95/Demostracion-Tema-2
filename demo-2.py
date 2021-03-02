@@ -12,6 +12,7 @@ import os
 import sys
     #Para el encritado de la Matriz
 import numpy as np
+from egcd import egcd #pip install egcd
     #Para el encriptado Asimetrico
 import rsa
 from cryptography.fernet import Fernet #para la implementacion de la llave secreta
@@ -126,7 +127,45 @@ def Encrypt_data_AES():
     print(ciphdata)
 
 def Decrypt_data_AES():
+    key = get_random_bytes(32) # Genera la llave
+    dataenc = 'Esto es tarea de criptografia!' # Son los datos
 
+    # === Cifrado ===
+
+    # Convierte los datos en bytes, usando .encode
+    data = dataenc.encode('utf-8')
+
+    #Crea el objecto de cifrado, y cifra los datos
+    cipherenc = AES.new(key, AES.MODE_CFB)
+    ciphbytes = cipherenc.encrypt(data)
+
+    # Aqui se presentan nuestros datos
+    iv = cipherenc.iv
+    ciphdata = ciphbytes
+    # Crea el objeto de cifrado y decifra los datos
+    ciphdec = AES.new(key, AES.MODE_CFB, iv=iv)
+    decbytes = ciphdec.decrypt(ciphdata)
+
+    # Convierte los bytes a string
+    decdata = decbytes.decode('utf-8')
+
+    print(decdata)
+    # === Prueba para comparar los datos ===
+
+    assert dataenc == decdata, 'La data original no concuerda con el resultado'
+
+#Metodos de Encriptado por Matriz
+def Matrix_mod_inv(matrix,modu):
+
+    return Matrix_mod_inv
+
+def Encrypt_HC(message, k):
+
+    pass
+
+def Derypt_HC():
+
+    pass
 
 #Funcion MAIN - Para el menu del programa
 def main():
